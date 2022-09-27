@@ -36,10 +36,18 @@ public class EmployeeController {
 
         employeeService.saveEmployee(employee);
 
-        return "employee/employee-list";
+
+        return "redirect:/employee/list"; //we are using endpoints not html files
 
     }
 
+    @GetMapping("/list")
+    public String listEmployees(Model model){
+
+        model.addAttribute("employeeList",employeeService.readAllEmployees());
+
+        return "employee/employee-list";
+    }
 
 
 
