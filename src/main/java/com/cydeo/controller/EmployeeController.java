@@ -2,9 +2,11 @@ package com.cydeo.controller;
 
 import com.cydeo.bootstrap.DataGenerator;
 import com.cydeo.model.Employee;
+import com.cydeo.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -12,6 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {
+
+    private final EmployeeService employeeService;
+
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @GetMapping("/register")
     public String createEmployee(Model model){
@@ -24,8 +32,11 @@ public class EmployeeController {
     }
 
     @PostMapping("insert")
-    public String insertEmployee(){
+    public String insertEmployee(@ModelAttribute("employee") Employee employee){
 
+        employeeService.saveEmployee(employee);
+
+        return "employee/employee-list";
 
     }
 
