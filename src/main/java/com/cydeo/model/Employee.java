@@ -23,6 +23,8 @@ public class Employee {
     @NotBlank
     @Size(max=12,min=2)
     private String firstName;
+    @NotBlank
+    @Size(max=12,min=2)
     private String lastName;
 
     //Thymeleaf accepts yyyy-MM-dd, but LocalDate accepts mm-dd-yyyy
